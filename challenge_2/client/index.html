@@ -3,13 +3,16 @@
   <head>
   </head>
   <body>
-    need action attribute to specify where form is submitting to
-    <form action="">
+    <!-- dont think u need action attribute because you're subbmitting to same page -->
+    <form  action='/' method='POST'>
       <label>Input Data Here</label>
       <!-- input lets user input data -->
-      <input>
-      <button>Submit</button>
+      <textarea name='message' id='message'></textarea>
+        <!-- <input type='text'> -->
+        <input type='submit' value='submit'>
+
     </form>
+    <!-- <script type='text/javascript' src='./app.js'></script> -->
   </body>
 </html>
 

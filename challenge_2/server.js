@@ -1,11 +1,23 @@
 const express = require('express');
-const app = express()
+const app = express();
+const bodyParser = require('body-parser');
 const path = require('path');
-const port = 3000
 
-app.get('/', (req, res) => res.send('Heyzy World!'))
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+const port = 3000;
+//
+app.get('/', function(req, res){
+  console.log('responding to root route');
+  res.send('hello from root route')
+})
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+// app.post('/', urlencodedParser,  function(req, res) {
+//   console.log('success');
+
+// });
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+// app.listen(port, () => console.log(`req.body=== ${port}!`))
 // app.use('/static', express.static(path.join(__dirname, 'client')))
 
 //in pack.json

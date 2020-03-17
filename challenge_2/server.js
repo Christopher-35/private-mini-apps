@@ -28,6 +28,10 @@ app.use(urlencodedParser);
 //   res.render('index.html', req.body);
 // })
 
+// app.get('/', function(req, res){
+
+// });
+
 app.post('/',  function(req, res) {
   let testing = func.jsonParse(req.body.message);
   console.log('testing', testing);

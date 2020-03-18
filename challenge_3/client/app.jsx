@@ -1,27 +1,4 @@
 
-// var App = (props) => (
-
-
-//   <div>
-//     <nav className="navbar">
-//       <div className="col-md-6 offset-md-3">
-//         <div><h5><em>search</em> view goes here</h5></div>
-//       </div>
-//     </nav>
-//     <div className="row">
-//       <div className="col-md-7">
-//         <div><h5><em>videoPlayer</em> view goes here</h5></div>
-//       </div>
-//       <div className="col-md-5">
-//       <VideoListEntry videos={this.props.videos} />
-//         <div><h5><em>videoList</em> view goes here</h5></div>
-//       </div>
-//     </div>
-//   </div>
-
-
-// );
-
 class App extends React.Component {
   constructor() {
     super();
@@ -64,5 +41,30 @@ class App extends React.Component {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 //export default App;
+
+// var Form1 = () => (
+//   <div className="Form1">
+//     {/* F1 collects name, email, and password for account creation. */}
+//   </div>
+// );
+
+// var Form2 = () => (
+// <div className="Form2">
+//     {/* F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number. */}
+//   </div>
+// );
+
+// var Form3 = () => (
+//   <div className="Form3">
+//       {/* F3 collects credit card #, expiry date, CVV, and billing zip code. */}
+//     </div>
+//   );
+
+//   var FinalForm = () => (
+//     <div className="FinalForm">
+//         {/* a confirmation page which summarizes the data collected in the prior three steps. This page contains a Purchase button that completes the purchase. When the purchase is complete, the user is returned to the homepage. */}
+//       </div>
+//     );
+
 
 ReactDOM.render(<App/>, document.getElementById('app'));

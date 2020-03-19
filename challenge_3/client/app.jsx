@@ -25,8 +25,12 @@ class Form1 extends React.Component  {
     this.setState(this.initialState);
   }
 render () {
+  if (!this.props.isFalse){
+    return null;
+  }
   const {name, job} = this.state;
 return (
+
   <form>
     <label>Name</label>
     <input
@@ -52,7 +56,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      characters: [],
+      isFalse: false,
+      characters: []
     }
 
     // this.state = {value: ''};
@@ -72,15 +77,16 @@ class App extends React.Component {
   render() {
     return (
       <div>
-      {/* <form /*onSubmit={this.handleSubmit}>*/}
-        <label>
-        <input type="submit" value="Checkout" />
-          <hl>CheckOut</hl>
-          {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
-        <Form1 handleSubmit={this.handleSubmit}/>
-        </label>
+      <form /*onSubmit={this.handleSubmit}*/ >
+      <Form1 /*handleSubmit={this.handleSubmit}*/ isFalse={this.state.isFalse}/>
+      CheckOut
+        <input type="submit" value="Checkout"/>
 
-      {/* </form> */}
+          {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
+
+
+
+      </form>
       </div>
     );
   }

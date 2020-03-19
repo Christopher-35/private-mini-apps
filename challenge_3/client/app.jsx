@@ -37,8 +37,26 @@ return (
       type='text'
       name='name'
       id='name'
-      value={name}
-      onChange={this.handleChange}
+      //value={name}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <br></br>
+    <label>email</label>
+    <input
+      type='text'
+      name='email'
+      id='email'
+      // value={email}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <br></br>
+    <label>password</label>
+    <input
+      type='text'
+      name='password'
+      id='password'
+      // value={password}
+      onChange={(e) => this.handleChange(e)}
     />
     <input type="button" value="Submit" onClick={this.submitForm} />
   </form>
@@ -56,6 +74,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isDisabled: false,
       isFalse: false,
       characters: []
     }
@@ -76,23 +95,24 @@ class App extends React.Component {
   }
 
   handleClick(){
-    this.setState({isFalse: !this.state.isFalse})
+    this.setState({isFalse: !this.state.isFalse, isDisabled: !this.state.isDisabled})
   }
+
 
   render() {
 
     return (
       <div>
       {/* <form /*onSubmit={this.handleSubmit}*/ }
-      <Form1 /*handleSubmit={this.handleSubmit}*/ isFalse={this.state.isFalse}/>
-      CheckOut
-        <input type="submit" value="Checkout" onClick={this.handleClick}/>
+      <Form1 handleSubmit={this.handleSubmit} isFalse={this.state.isFalse}/>
+
+
+        <input type='submit' value="Checkout" onClick={this.handleClick} disabled={this.state.isDisabled} />
 
           {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
 
-
-
       {/* </form> */}
+
       </div>
     );
   }

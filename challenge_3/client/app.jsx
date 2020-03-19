@@ -61,8 +61,9 @@ class App extends React.Component {
     }
 
     // this.state = {value: ''};
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -74,19 +75,24 @@ class App extends React.Component {
     this.setState({characters: [...this.state.characters, char]})
   }
 
+  handleClick(){
+    this.setState({isFalse: !this.state.isFalse})
+  }
+
   render() {
+
     return (
       <div>
-      <form /*onSubmit={this.handleSubmit}*/ >
+      {/* <form /*onSubmit={this.handleSubmit}*/ }
       <Form1 /*handleSubmit={this.handleSubmit}*/ isFalse={this.state.isFalse}/>
       CheckOut
-        <input type="submit" value="Checkout"/>
+        <input type="submit" value="Checkout" onClick={this.handleClick}/>
 
           {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
 
 
 
-      </form>
+      {/* </form> */}
       </div>
     );
   }

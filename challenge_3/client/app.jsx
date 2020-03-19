@@ -75,7 +75,7 @@ class App extends React.Component {
       {/* <form /*onSubmit={this.handleSubmit}>*/}
         <label>
         <input type="submit" value="Checkout" />
-          CheckOut
+          <hl>CheckOut</hl>
           {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
         <Form1 handleSubmit={this.handleSubmit}/>
         </label>

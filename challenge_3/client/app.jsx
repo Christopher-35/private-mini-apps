@@ -8,10 +8,11 @@ class Form1 extends React.Component  {
     }
     this.handleChange = this.handleChange.bind(this)
     this.submitForm = this.submitForm.bind(this)
+    ////////////////////props.handleSubmit.bind(this)
   }
 
 
-  //state = this.initialState;
+  state = this.initialState;
 
   handleChange = e => {
     const {name, value} = e.target
@@ -23,6 +24,8 @@ class Form1 extends React.Component  {
   submitForm = () => {
     this.props.handleSubmit(this.state)
     this.setState(this.initialState);
+    this.setState({isFalse: !this.state.isFalse, isDisabled: !this.state.isDisabled})
+
   }
 render () {
   if (!this.props.isFalse){
@@ -30,7 +33,8 @@ render () {
   }
   const {name, job} = this.state;
 return (
-
+  <div>
+<Form2 handleSubmit={this.props.handleSubmit} isFalse={this.state.isFalse}/>
   <form>
     <label>Name</label>
     <input
@@ -60,12 +64,92 @@ return (
     />
     <input type="button" value="Submit" onClick={this.submitForm} />
   </form>
-  // <div>
-
-  //     sampleText
-
+  </div>
   //   {/* F1 collects name, email, and password for account creation. */}
-  // </div>
+)
+}
+}
+class Form2 extends React.Component  {
+  constructor (props) {
+    super(props)
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.submitForm = this.submitForm.bind(this)
+  }
+
+
+  state = this.initialState;
+
+  handleChange = e => {
+    const {name, value} = e.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  submitForm = () => {
+    this.props.handleSubmit(this.state)
+    this.setState(this.initialState);
+  }
+render () {
+  if (!this.props.isFalse){
+    return null;
+  }
+  const {name, job} = this.state;
+return (
+
+  <form>
+    <label>Address1</label>
+    <input
+      type='text'
+      name='Address1'
+      id='Address1'
+      //value={name}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <br></br>
+    <label>Address2</label>
+    <input
+      type='text'
+      name='Address2'
+      id='Address2'
+      // value={email}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <br></br>
+    <label>City</label>
+    <input
+      type='text'
+      name='City'
+      id='City'
+      // value={password}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <br></br>
+    <label>State</label>
+    <input
+      type='text'
+      name='State'
+      id='State'
+      // value={password}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <br></br>
+    <label>zipcode</label>
+    <input
+      type='text'
+      name='zipcode'
+      id='zipcode'
+      // value={password}
+      onChange={(e) => this.handleChange(e)}
+    />
+    <input type="button" value="Submit" onClick={this.submitForm} />
+  </form>
+  //ine 1, line 2, city, state, zip code) and phone number
 )
 }
 }

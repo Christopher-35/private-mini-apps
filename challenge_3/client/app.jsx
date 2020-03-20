@@ -8,7 +8,7 @@ class Form1 extends React.Component  {
     }
     this.handleChange = this.handleChange.bind(this)
     this.submitForm = this.submitForm.bind(this)
-    ////////////////////props.handleSubmit.bind(this)
+    this.renderForm2 = this.renderForm2.bind(this);
   }
 
 
@@ -23,18 +23,25 @@ class Form1 extends React.Component  {
 
   submitForm = () => {
     this.props.handleSubmit(this.state)
-    this.setState(this.initialState);
-    this.setState({isFalse: !this.state.isFalse, isDisabled: !this.state.isDisabled})
+    //this.setState(this.initialState);
 
+  }
+
+  renderForm2 = () => {
+    this.submitForm();
+    this.props.handleForm2()
+    console.log('renderForm2')
   }
 render () {
   if (!this.props.isFalse){
     return null;
   }
-  const {name, job} = this.state;
+  //const {name, job} = this.state;
 return (
   <div>
-<Form2 handleSubmit={this.props.handleSubmit} isFalse={this.state.isFalse}/>
+<Form2 handleSubmit={()=>{this.props.handleSubmit}} handleChange={this.handleChange}
+submitForm={this.submitForm} isFalse={this.state.isFalse} handleForm2={this.handleForm2}
+handleForm3={this.props.handleForm3} isFalse2={this.props.isFalse2} isFalse3={this.props.isFalse3}/>
   <form>
     <label>Name</label>
     <input
@@ -62,7 +69,7 @@ return (
       // value={password}
       onChange={(e) => this.handleChange(e)}
     />
-    <input type="button" value="Submit" onClick={this.submitForm} />
+    <input type="button" value="Next" onClick={() => this.renderForm2() } />
   </form>
   </div>
   //   {/* F1 collects name, email, and password for account creation. */}
@@ -72,36 +79,44 @@ return (
 class Form2 extends React.Component  {
   constructor (props) {
     super(props)
-    this.state = {
-      name: '',
-      email: '',
-      password: ''
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.submitForm = this.submitForm.bind(this)
+    // this.state = {
+    //   name: '',
+    //   email: '',
+    //   password: ''
+    // }
+
   }
 
 
   state = this.initialState;
 
-  handleChange = e => {
-    const {name, value} = e.target
-    this.setState({
-      [name]: value
-    })
+  // handleChange = e => {
+  //   const {name, value} = e.target
+  //   this.setState({
+  //     [name]: value
+  //   })
+  // }
+
+  // submitForm = () => {
+  //   this.props.handleSubmit(this.state)
+  //   this.setState(this.initialState);
+  // }
+  renderForm3 = () => {
+    this.props.submitForm();
+    this.props.handleForm3();
+    console.log('HitRenderFORM3')
   }
 
-  submitForm = () => {
-    this.props.handleSubmit(this.state)
-    this.setState(this.initialState);
-  }
 render () {
-  if (!this.props.isFalse){
+  if (!this.props.isFalse2){
     return null;
   }
-  const {name, job} = this.state;
+  //const {name, job} = this.state;
 return (
-
+  <div>
+    <Form3 handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange}
+submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.handleForm3}
+isFalse3={this.props.isFalse3}/>
   <form>
     <label>Address1</label>
     <input
@@ -109,7 +124,7 @@ return (
       name='Address1'
       id='Address1'
       //value={name}
-      onChange={(e) => this.handleChange(e)}
+      onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
     <label>Address2</label>
@@ -118,7 +133,7 @@ return (
       name='Address2'
       id='Address2'
       // value={email}
-      onChange={(e) => this.handleChange(e)}
+      onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
     <label>City</label>
@@ -127,7 +142,7 @@ return (
       name='City'
       id='City'
       // value={password}
-      onChange={(e) => this.handleChange(e)}
+      onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
     <label>State</label>
@@ -136,7 +151,7 @@ return (
       name='State'
       id='State'
       // value={password}
-      onChange={(e) => this.handleChange(e)}
+      onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
     <label>zipcode</label>
@@ -145,28 +160,108 @@ return (
       name='zipcode'
       id='zipcode'
       // value={password}
-      onChange={(e) => this.handleChange(e)}
+      onChange={(e) => this.props.handleChange(e)}
     />
-    <input type="button" value="Submit" onClick={this.submitForm} />
+    <input type="button" value="Next" onClick={() => {this.renderForm3()}} />
   </form>
+  </div>
   //ine 1, line 2, city, state, zip code) and phone number
+)
+}
+}
+
+class Form3 extends React.Component  {
+  constructor (props) {
+    super(props)
+    // this.state = {
+    //   name: '',
+    //   email: '',
+    //   password: ''
+    // }
+
+  }
+
+
+  state = this.initialState;
+
+  // handleChange = e => {
+  //   const {name, value} = e.target
+  //   this.setState({
+  //     [name]: value
+  //   })
+  // }
+
+  // submitForm = () => {
+  //   this.props.handleSubmit(this.state)
+  //   this.setState(this.initialState);
+  // }
+render () {
+  if (!this.props.isFalse3){
+    return null;
+  }
+  //const {name, job} = this.state;
+return (
+
+  <form>
+    <label>cardNo.</label>
+    <input
+      type='text'
+      name='cardNo.'
+      id='cardNo.'
+      //value={name}
+      onChange={(e) => this.props.handleChange(e)}
+    />
+    <br></br>
+    <label>expirationDate</label>
+    <input
+      type='text'
+      name='expirationDate'
+      id='expirationDate'
+      // value={email}
+      onChange={(e) => this.props.handleChange(e)}
+    />
+    <br></br>
+    <label>cvv</label>
+    <input
+      type='text'
+      name='cvv'
+      id='cvv'
+      // value={password}
+      onChange={(e) => this.props.handleChange(e)}
+    />
+    <br></br>
+    <label>billingZipCode</label>
+    <input
+      type='text'
+      name='billingZipCode'
+      id='billingZipCode'
+      // value={password}
+      onChange={(e) => this.props.handleChange(e)}
+    />
+
+    <input type="button" value="Next" onClick={this.props.submitForm} />
+  </form>
+  //credit card #, expiry date, CVV, and billing zip code
 )
 }
 }
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isDisabled: false,
       isFalse: false,
+      isFalse2: false,
+      isFalse3: false,
       characters: []
     }
-
-    // this.state = {value: ''};
+    // this.state = {value: ''}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleForm2 = this.handleForm2.bind(this);
+    this.handleForm3 = this.handleForm3.bind(this);
   }
 
   handleChange(event) {
@@ -179,7 +274,17 @@ class App extends React.Component {
   }
 
   handleClick(){
+
     this.setState({isFalse: !this.state.isFalse, isDisabled: !this.state.isDisabled})
+  }
+
+  handleForm2(){
+    this.setState({isFalse2: !this.state.isFalse2})
+    console.log('APP handleForm2')
+  }
+
+  handleForm3(){
+    this.setState({isFalse3: !this.state.isFalse3})
   }
 
 
@@ -188,7 +293,9 @@ class App extends React.Component {
     return (
       <div>
       {/* <form /*onSubmit={this.handleSubmit}*/ }
-      <Form1 handleSubmit={this.handleSubmit} isFalse={this.state.isFalse}/>
+      <Form1 handleSubmit={this.handleSubmit} isFalse={this.state.isFalse} click={this.handleClick}
+      handleForm2={this.handleForm2} handleForm3={this.handleForm3} isFalse2={this.state.isFalse2}
+      isFalse3={this.state.isFalse3}/>
 
 
         <input type='submit' value="Checkout" onClick={this.handleClick} disabled={this.state.isDisabled} />

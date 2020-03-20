@@ -41,7 +41,8 @@ return (
   <div>
 <Form2 handleSubmit={()=>{this.props.handleSubmit}} handleChange={this.handleChange}
 submitForm={this.submitForm} isFalse={this.state.isFalse} handleForm2={this.handleForm2}
-handleForm3={this.props.handleForm3} isFalse2={this.props.isFalse2} isFalse3={this.props.isFalse3}/>
+handleForm3={this.props.handleForm3} isFalse2={this.props.isFalse2} isFalse3={this.props.isFalse3}
+handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4} state={this.props.state}/>
   <form>
     <label>Name</label>
     <input
@@ -79,32 +80,16 @@ handleForm3={this.props.handleForm3} isFalse2={this.props.isFalse2} isFalse3={th
 class Form2 extends React.Component  {
   constructor (props) {
     super(props)
-    // this.state = {
-    //   name: '',
-    //   email: '',
-    //   password: ''
-    // }
-
+    this.renderForm3 = this.renderForm3.bind(this);
   }
 
 
   state = this.initialState;
 
-  // handleChange = e => {
-  //   const {name, value} = e.target
-  //   this.setState({
-  //     [name]: value
-  //   })
-  // }
-
-  // submitForm = () => {
-  //   this.props.handleSubmit(this.state)
-  //   this.setState(this.initialState);
-  // }
   renderForm3 = () => {
     this.props.submitForm();
-    this.props.handleForm3();
-    console.log('HitRenderFORM3')
+    this.props.handleForm3()
+    console.log('renderForm3')
   }
 
 render () {
@@ -115,15 +100,15 @@ render () {
 return (
   <div>
     <Form3 handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange}
-submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.handleForm3}
-isFalse3={this.props.isFalse3}/>
+submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.props.handleForm3}
+isFalse3={this.props.isFalse3} handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4}
+state={this.props.state}/>
   <form>
     <label>Address1</label>
     <input
       type='text'
       name='Address1'
       id='Address1'
-      //value={name}
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -132,7 +117,6 @@ isFalse3={this.props.isFalse3}/>
       type='text'
       name='Address2'
       id='Address2'
-      // value={email}
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -141,7 +125,6 @@ isFalse3={this.props.isFalse3}/>
       type='text'
       name='City'
       id='City'
-      // value={password}
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -150,7 +133,6 @@ isFalse3={this.props.isFalse3}/>
       type='text'
       name='State'
       id='State'
-      // value={password}
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -159,7 +141,6 @@ isFalse3={this.props.isFalse3}/>
       type='text'
       name='zipcode'
       id='zipcode'
-      // value={password}
       onChange={(e) => this.props.handleChange(e)}
     />
     <input type="button" value="Next" onClick={() => {this.renderForm3()}} />
@@ -173,42 +154,35 @@ isFalse3={this.props.isFalse3}/>
 class Form3 extends React.Component  {
   constructor (props) {
     super(props)
-    // this.state = {
-    //   name: '',
-    //   email: '',
-    //   password: ''
-    // }
-
+    this.renderForm4 = this.renderForm4.bind(this);
   }
 
 
   state = this.initialState;
 
-  // handleChange = e => {
-  //   const {name, value} = e.target
-  //   this.setState({
-  //     [name]: value
-  //   })
-  // }
+  renderForm4 = () => {
+    this.props.submitForm();
+    this.props.handleForm4();
 
-  // submitForm = () => {
-  //   this.props.handleSubmit(this.state)
-  //   this.setState(this.initialState);
-  // }
+  }
+
 render () {
   if (!this.props.isFalse3){
     return null;
   }
-  //const {name, job} = this.state;
-return (
 
+return (
+  <div>
+    <Form4 handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange}
+submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.props.handleForm3}
+isFalse3={this.props.isFalse3} handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4}
+state={this.props.state}/>
   <form>
     <label>cardNo.</label>
     <input
       type='text'
-      name='cardNo.'
-      id='cardNo.'
-      //value={name}
+      name='cardNo'
+      id='cardNo'
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -217,7 +191,6 @@ return (
       type='text'
       name='expirationDate'
       id='expirationDate'
-      // value={email}
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -226,7 +199,6 @@ return (
       type='text'
       name='cvv'
       id='cvv'
-      // value={password}
       onChange={(e) => this.props.handleChange(e)}
     />
     <br></br>
@@ -235,12 +207,57 @@ return (
       type='text'
       name='billingZipCode'
       id='billingZipCode'
-      // value={password}
       onChange={(e) => this.props.handleChange(e)}
     />
 
-    <input type="button" value="Next" onClick={this.props.submitForm} />
+    <input type="button" value="Next" onClick={() => this.renderForm4()} />
   </form>
+  </div>
+  //credit card #, expiry date, CVV, and billing zip code
+)
+}
+}
+
+class Form4 extends React.Component  {
+  constructor (props) {
+    super(props)
+  }
+
+
+  state = this.initialState;
+
+render () {
+  if (!this.props.isFalse4) {
+    return null;
+  }
+
+return (
+  <div>
+    {/*console.log(this.props.state[this.props.state.length-1].name)*/}
+  <form>
+
+    <label>Confirm Your Info</label>
+    <br></br>
+{/* {`Name:${this.state.characters[this.state.characters.length-1].name} Name:${} Name:${} Name:${} Name:${} Name:${} Name:${} Name:${} Name:${} Name:${} Name:${}
+`} */} {/*Name: + {this.state.characters[this.state.characters.length-1].name}*/}
+ Name: {this.props.state[this.props.state.length-1].name} <br></br>
+ Email: {this.props.state[this.props.state.length-1].email}<br></br>
+ Password: {this.props.state[this.props.state.length-1].password}<br></br>
+ Address1: {this.props.state[this.props.state.length-1].Address1}<br></br>
+ Address2: {this.props.state[this.props.state.length-1].Address2}<br></br>
+ City: {this.props.state[this.props.state.length-1].City}<br></br>
+ zipcode: {this.props.state[this.props.state.length-1].zipcode}<br></br>
+ cardNo.: {this.props.state[this.props.state.length-1].cardNo}<br></br>
+ Expiration Date: {this.props.state[this.props.state.length-1].expirationDate}<br></br>
+ CVV: {this.props.state[this.props.state.length-1].cvv}<br></br>
+ Billing-ZipCode: {this.props.state[this.props.state.length-1].billingZipCode}
+    <br></br>
+{/* {1 collects name, email, and password for account creation.
+F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
+F3 collects credit card #, expiry date, CVV, and billing zip code.} */}
+    <input type="button" value="Purchase" onClick={this.props.submitForm} />
+  </form>
+  </div>
   //credit card #, expiry date, CVV, and billing zip code
 )
 }
@@ -254,6 +271,7 @@ class App extends React.Component {
       isFalse: false,
       isFalse2: false,
       isFalse3: false,
+      isFalse4: false,
       characters: []
     }
     // this.state = {value: ''}
@@ -262,6 +280,7 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleForm2 = this.handleForm2.bind(this);
     this.handleForm3 = this.handleForm3.bind(this);
+    this.handleForm4 = this.handleForm4.bind(this);
   }
 
   handleChange(event) {
@@ -285,8 +304,12 @@ class App extends React.Component {
 
   handleForm3(){
     this.setState({isFalse3: !this.state.isFalse3})
+    console.log('APP handleForm3')
   }
 
+  handleForm4(){
+    this.setState({isFalse4: !this.state.isFalse4})
+  }
 
   render() {
 
@@ -295,7 +318,8 @@ class App extends React.Component {
       {/* <form /*onSubmit={this.handleSubmit}*/ }
       <Form1 handleSubmit={this.handleSubmit} isFalse={this.state.isFalse} click={this.handleClick}
       handleForm2={this.handleForm2} handleForm3={this.handleForm3} isFalse2={this.state.isFalse2}
-      isFalse3={this.state.isFalse3}/>
+      isFalse3={this.state.isFalse3} handleForm4={this.handleForm4} isFalse4={this.state.isFalse4}
+      state={this.state.characters}/>
 
 
         <input type='submit' value="Checkout" onClick={this.handleClick} disabled={this.state.isDisabled} />

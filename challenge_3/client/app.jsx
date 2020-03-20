@@ -42,7 +42,8 @@ return (
 <Form2 handleSubmit={()=>{this.props.handleSubmit}} handleChange={this.handleChange}
 submitForm={this.submitForm} isFalse={this.state.isFalse} handleForm2={this.handleForm2}
 handleForm3={this.props.handleForm3} isFalse2={this.props.isFalse2} isFalse3={this.props.isFalse3}
-handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4} state={this.props.state}/>
+handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4} state={this.props.state}
+renderParentCallback={this.props.renderParentCallback}/>
   <form>
     <label>Name</label>
     <input
@@ -102,7 +103,7 @@ return (
     <Form3 handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange}
 submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.props.handleForm3}
 isFalse3={this.props.isFalse3} handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4}
-state={this.props.state}/>
+state={this.props.state} renderParentCallback={this.props.renderParentCallback}/>
   <form>
     <label>Address1</label>
     <input
@@ -176,7 +177,7 @@ return (
     <Form4 handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange}
 submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.props.handleForm3}
 isFalse3={this.props.isFalse3} handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4}
-state={this.props.state}/>
+state={this.props.state} renderParentCallback={this.props.renderParentCallback}/>
   <form>
     <label>cardNo.</label>
     <input
@@ -255,7 +256,7 @@ return (
 {/* {1 collects name, email, and password for account creation.
 F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
 F3 collects credit card #, expiry date, CVV, and billing zip code.} */}
-    <input type="button" value="Purchase" onClick={this.props.submitForm} />
+    <input type="button" value="Purchase" onClick={() => this.props.renderParentCallback()} />
   </form>
   </div>
   //credit card #, expiry date, CVV, and billing zip code
@@ -281,6 +282,7 @@ class App extends React.Component {
     this.handleForm2 = this.handleForm2.bind(this);
     this.handleForm3 = this.handleForm3.bind(this);
     this.handleForm4 = this.handleForm4.bind(this);
+    this.renderParentCallback = this.renderParentCallback.bind(this);
   }
 
   handleChange(event) {
@@ -311,6 +313,11 @@ class App extends React.Component {
     this.setState({isFalse4: !this.state.isFalse4})
   }
 
+  renderParentCallback() {
+    this.setState({isDisabled: !this.state.isDisabled, isFalse: !this.state.isFalse, isFalse2: !this.state.isFalse2, isFalse3: !this.state.isFalse3, isFalse4: !this.state.isFalse4})
+    this.forceUpdate();
+  }
+
   render() {
 
     return (
@@ -319,7 +326,7 @@ class App extends React.Component {
       <Form1 handleSubmit={this.handleSubmit} isFalse={this.state.isFalse} click={this.handleClick}
       handleForm2={this.handleForm2} handleForm3={this.handleForm3} isFalse2={this.state.isFalse2}
       isFalse3={this.state.isFalse3} handleForm4={this.handleForm4} isFalse4={this.state.isFalse4}
-      state={this.state.characters}/>
+      state={this.state.characters} renderParentCallback={this.renderParentCallback}/>
 
 
         <input type='submit' value="Checkout" onClick={this.handleClick} disabled={this.state.isDisabled} />

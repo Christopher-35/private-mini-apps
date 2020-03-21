@@ -44,7 +44,7 @@ submitForm={this.submitForm} isFalse={this.state.isFalse} handleForm2={this.hand
 handleForm3={this.props.handleForm3} isFalse2={this.props.isFalse2} isFalse3={this.props.isFalse3}
 handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4} state={this.props.state}
 renderParentCallback={this.props.renderParentCallback}/>
-  <form>
+  <form method='POST' action='/f1'>
     <label>Name</label>
     <input
       type='text'
@@ -71,7 +71,7 @@ renderParentCallback={this.props.renderParentCallback}/>
       // value={password}
       onChange={(e) => this.handleChange(e)}
     />
-    <input type="button" value="Next" onClick={() => this.renderForm2() } />
+    <input type="submit" value="Next" onClick={() => this.renderForm2() } />
   </form>
   </div>
   //   {/* F1 collects name, email, and password for account creation. */}
@@ -322,7 +322,7 @@ class App extends React.Component {
 
     return (
       <div>
-      {/* <form /*onSubmit={this.handleSubmit}*/ }
+       {/* <form onSubmit={this.handleSubmit} method='POST'action='/'> */}
       <Form1 handleSubmit={this.handleSubmit} isFalse={this.state.isFalse} click={this.handleClick}
       handleForm2={this.handleForm2} handleForm3={this.handleForm3} isFalse2={this.state.isFalse2}
       isFalse3={this.state.isFalse3} handleForm4={this.handleForm4} isFalse4={this.state.isFalse4}

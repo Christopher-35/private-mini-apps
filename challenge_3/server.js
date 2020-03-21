@@ -1,11 +1,15 @@
 //SERVER------------------------------------
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser')
+const urlencodedParser = bodyParser.urlencoded({ extended: true })
 const app = express();
 const port = 3000;
 const morgan = require('morgan');
 //DATABASE---------------------------------------
 const mysql = require('mysql');
+
+
 
 let connection = mysql.createConnection({
   host: 'localhost',
@@ -29,21 +33,46 @@ connection.connect(function(err) {
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use(morgan('short'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get('/', (req, res) => {
-
-// })
+app.get('/', (req, res) => {
+  console.log('firstGet')
+})
 
 app.post('/', (req, res) => {
-  res.redirect('/f1')
+  console.log('req', req);
+  if (req.body.name && req.body.email && req.body.password){
+    let name=req.body.name;
+    let email=req.body.email;
+    let password=req.body.password;
+
+  connection.query(`INSERT INTO checkouts (name, email, password) VALUES (${name}, ${email}, ${password})`, function(err, result){
+      if(err)
+          console.log("ERROR--->", err);
+      });
+    }
+
+
 })
 
 app.get('/f1', (req, res) => {
-
+  console.log('get2', req.body);
 })
 
 app.post('/f1', (req, res) => {
-  res.redirect('/f2')
+  console.log('post', req.body);
+  if (req.body.name && req.body.email && req.body.password){
+    let name= req.body.name + "";
+    let email=req.body.email + "";
+    let password=req.body.password + "";
+    let arr =[];
+    arr.push(name, email, password);
+  connection.query("INSERT INTO checkouts(name, email, password)VALUES (?) ", [arr], function(err, result){
+      if(err)
+          console.log("ERROR--->", err);
+      });
+    }
 })
 
 // app.get('/f2', (req, res) => {

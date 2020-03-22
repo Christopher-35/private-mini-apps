@@ -40,18 +40,14 @@ app.get('/', (req, res) => {
   console.log('firstGet')
 })
 
-app.post('/', (req, res) => {
-  console.log('req', req);
-  if (req.body.name && req.body.email && req.body.password){
-    let name=req.body.name;
-    let email=req.body.email;
-    let password=req.body.password;
-
-  connection.query(`INSERT INTO checkouts (name, email, password) VALUES (${name}, ${email}, ${password})`, function(err, result){
-      if(err)
-          console.log("ERROR--->", err);
-      });
-    }
+app.post('/home', (req, res) => {
+console.log('post hit');
+let arr =["test", "test", "test"];
+  connection.query("INSERT INTO checkouts(name, email, password)VALUES (?) ", [arr], function(err, result){
+    if(err){
+        console.log("ERROR--->", err);
+    };
+  });
 
 
 })
@@ -61,33 +57,74 @@ app.get('/f1', (req, res) => {
 })
 
 app.post('/f1', (req, res) => {
-  console.log('post', req.body);
+  console.log('req.query==', req.query);
   if (req.body.name && req.body.email && req.body.password){
     let name= req.body.name + "";
     let email=req.body.email + "";
     let password=req.body.password + "";
     let arr =[];
     arr.push(name, email, password);
-  connection.query("INSERT INTO checkouts(name, email, password)VALUES (?) ", [arr], function(err, result){
+    connection.query("INSERT INTO checkouts(name, email, password)VALUES (?) ", [arr], function(err, result){
       if(err)
           console.log("ERROR--->", err);
       });
     }
+
+
+
+
 })
 
-// app.get('/f2', (req, res) => {
+app.get('/f2', (req, res) => {
 
-// })
+})
 
 app.post('/f2', (req, res) => {
-  res.redirect('/f3')
+  console.log('inF2');
+  if (req.body.Address1 && req.body.Address2 && req.body.City && req.body.State && req.body.zipcode && req. body.phoneNumber ) {
+
+    let Address1= req.body.Address1 + "";
+    let Address2=req.body.Address2 + "";
+    let City=req.body.City + "";
+    let State = req.body.State + "";
+    let zipcode = req.body.zipcode + "";
+    let phoneNumber = req.body.phoneNumber + "";
+
+    let arr =[];
+    arr.push(Address1, Address2, City, State, zipcode, phoneNumber);
+    connection.query("INSERT INTO checkouts(address1, address2, city, state, zipcode, phonenum)VALUES (?) ", [arr], function(err, result){
+      if (err) {
+          console.log("ERROR--->", err);
+      };
+
 })
+}
+});
 
 // app.get('/f3', (req, res) => {
 // })
 
 app.post('/f3', (req, res) => {
-  res.redirect('/final')
+  console.log('INF3');
+
+  if (req.body.cardNo && req.body.expirationDate && req.body.cvv && req.body.billingZipCode) {
+
+    let cardNo = req.body.cardNo + "";
+    let expirationDate = req.body.expirationDate + "";
+    let cvv = req.body.cvv + "";
+    let billingZipCode = req.body.billingZipCode + "";
+
+    //creditno | expirdata | cvv  | billingzip
+    let arr =[];
+    arr.push(cardNo, expirationDate, cvv, billingZipCode);
+    connection.query("INSERT INTO checkouts(creditno, expirdata, cvv, billingzip)VALUES (?) ", [arr], function(err, result){
+      if (err) {
+          console.log("ERROR--->", err);
+      };
+
+})
+}
+
 })
 
  app.listen(port, () => console.log('server running...'));

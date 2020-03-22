@@ -104,7 +104,7 @@ return (
 submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.props.handleForm3}
 isFalse3={this.props.isFalse3} handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4}
 state={this.props.state} renderParentCallback={this.props.renderParentCallback}/>
-  <form>
+  <form method="POST" action="/f2">
     <label>Address1</label>
     <input
       type='text'
@@ -144,7 +144,15 @@ state={this.props.state} renderParentCallback={this.props.renderParentCallback}/
       id='zipcode'
       onChange={(e) => this.props.handleChange(e)}
     />
-    <input type="button" value="Next" onClick={() => {this.renderForm3()}} />
+    <br></br>
+    <label>Phone Number</label>
+    <input
+      type='text'
+      name='phoneNumber'
+      id='phoneNumber'
+      onChange={(e) => this.props.handleChange(e)}
+    />
+    <input type="submit" value="Next" onClick={() => {this.renderForm3()}} />
   </form>
   </div>
   //ine 1, line 2, city, state, zip code) and phone number
@@ -178,7 +186,7 @@ return (
 submitForm={this.props.submitForm} isFalse={this.props.isFalse} handleForm3={this.props.handleForm3}
 isFalse3={this.props.isFalse3} handleForm4={this.props.handleForm4} isFalse4={this.props.isFalse4}
 state={this.props.state} renderParentCallback={this.props.renderParentCallback}/>
-  <form>
+  <form method="POST" action="/f3">
     <label>cardNo.</label>
     <input
       type='text'
@@ -211,7 +219,7 @@ state={this.props.state} renderParentCallback={this.props.renderParentCallback}/
       onChange={(e) => this.props.handleChange(e)}
     />
 
-    <input type="button" value="Next" onClick={() => this.renderForm4()} />
+    <input type="submit" value="Next" onClick={() => this.renderForm4()} />
   </form>
   </div>
   //credit card #, expiry date, CVV, and billing zip code
@@ -251,8 +259,8 @@ return (
  cardNo.: {this.props.state[this.props.state.length-1].cardNo}<br></br>
  Expiration Date: {this.props.state[this.props.state.length-1].expirationDate}<br></br>
  CVV: {this.props.state[this.props.state.length-1].cvv}<br></br>
- Billing-ZipCode: {this.props.state[this.props.state.length-1].billingZipCode}
-    <br></br>
+ Billing-ZipCode: {this.props.state[this.props.state.length-1].billingZipCode}<br></br>
+ Phone-Number: {this.props.state[this.props.state.length-1].phoneNumber}<br></br>
 {/* {1 collects name, email, and password for account creation.
 F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
 F3 collects credit card #, expiry date, CVV, and billing zip code.} */}
@@ -328,14 +336,12 @@ class App extends React.Component {
       isFalse3={this.state.isFalse3} handleForm4={this.handleForm4} isFalse4={this.state.isFalse4}
       state={this.state.characters} renderParentCallback={this.renderParentCallback}/>
 
+        <form method="POST" action="/home" >
+        <input type="submit" value="Checkout"  onClick={() => this.handleClick() } disabled={this.state.isDisabled}/>
 
-        <input type='submit' value="Checkout" onClick={this.handleClick} disabled={this.state.isDisabled} />
+        </form>
 
-          {/* <input type="text" value={this.state.value} onChange={this.handleChange} /> */}
-
-      {/* </form> */}
-
-      </div>
+        </div>
     );
   }
 }

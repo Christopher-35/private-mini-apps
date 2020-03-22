@@ -64,9 +64,9 @@ app.post('/f1', (req, res) => {
     let password=req.body.password + "";
     let arr =[];
     arr.push(name, email, password);
-    connection.query("INSERT INTO checkouts(name, email, password)VALUES (?) ", [arr], function(err, result){
+    connection.query(`INSERT INTO checkouts(name, email, password)VALUES (?) `, [arr], function(err, result){
       if(err)
-          console.log("ERROR--->", err);
+          console.log(`ERROR--->`, err);
       });
     }
 
@@ -89,16 +89,32 @@ app.post('/f2', (req, res) => {
     let State = req.body.State + "";
     let zipcode = req.body.zipcode + "";
     let phoneNumber = req.body.phoneNumber + "";
-
     let arr =[];
-    arr.push(Address1, Address2, City, State, zipcode, phoneNumber);
-    connection.query("INSERT INTO checkouts(address1, address2, city, state, zipcode, phonenum)VALUES (?) ", [arr], function(err, result){
-      if (err) {
-          console.log("ERROR--->", err);
-      };
 
-})
+    arr.push(Address1, Address2, City, State, zipcode, phoneNumber);
+
+    connection.query(`SELECT MAX(id) FROM checkouts`, function(err, lastId){
+      if (err) {
+        console.log(`error--->`, err);
+      }
+      lastId = lastId[0][`MAX(id)`];
+
+    connection.query(`UPDATE checkouts SET address1=?, address2=?, city=?, state=?, zipcode=?, phonenum=? WHERE id=${lastId}`, arr, function(err, result){
+      if (err) {
+          console.log(`ERROR--->`, err);
+      };
+  })
+
+    })
+
 }
+// var sql = "UPDATE trn_employee set first_name =? , last_name =?  WHERE employee_id = ?";
+
+// var query = connection.query(sql, ["Vinayak", "Patil", 1], function(err, result) {
+//     console.log("Record Updated!!");
+//     console.log(result);
+
+
 });
 
 // app.get('/f3', (req, res) => {
@@ -117,12 +133,22 @@ app.post('/f3', (req, res) => {
     //creditno | expirdata | cvv  | billingzip
     let arr =[];
     arr.push(cardNo, expirationDate, cvv, billingZipCode);
-    connection.query("INSERT INTO checkouts(creditno, expirdata, cvv, billingzip)VALUES (?) ", [arr], function(err, result){
+
+    connection.query(`SELECT MAX(id) FROM checkouts`, function(err, lastId){
       if (err) {
-          console.log("ERROR--->", err);
+        console.log(`error--->`, err);
+      }
+      lastId = lastId[0][`MAX(id)`];
+
+//`UPDATE checkouts SET address1=?, address2=?, city=?, state=?, zipcode=?, phonenum=? WHERE id=${lastId}`
+    connection.query(`UPDATE checkouts SET creditno=?, expirdata=?, cvv=?, billingzip=? WHERE id=${lastId}`, arr, function(err, result){
+      if (err) {
+          console.log(`ERROR--->`, err);
       };
 
 })
+
+    })
 }
 
 })
